@@ -565,8 +565,8 @@ function shuffleArray(arr) {
 
 // LOAD & SAVE
 function preloadDefaultQuestions() {
-    // Intentamos cargar el archivo index.json con las 1151 preguntas si existe, si no, cargamos el por defecto de HLC
-    fetch('index.json')
+    // Intentamos cargar el archivo preguntas.json con las 1151 preguntas si existe, si no, cargamos el por defecto de HLC
+    fetch('preguntas.json')
         .then(response => {
             if (!response.ok) {
                 return fetch('preguntas_HCL_1780578960016.json');
