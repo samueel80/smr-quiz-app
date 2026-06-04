@@ -617,10 +617,12 @@ function preloadDefaultQuestions() {
                         }
                     }
                 });
-                if (loadedCount > 0) {
-                    saveDatabase();
-                    console.log(`Pre-cargadas ${loadedCount} preguntas.`);
-                }
+                db.indexPreloaded = true;
+                saveDatabase();
+                console.log(`Pre-cargadas ${loadedCount} preguntas.`);
+            } else {
+                db.indexPreloaded = true;
+                saveDatabase();
             }
             updateDashboardUI();
         })
@@ -643,6 +645,7 @@ function loadDatabase() {
             if (db.streak === undefined) db.streak = 0;
             if (db.lastStudyDate === undefined) db.lastStudyDate = null;
             if (db.questionStats === undefined) db.questionStats = {};
+            if (db.indexPreloaded === undefined) db.indexPreloaded = false;
 
             // Clean subject names automatically
             let hasChanges = false;
@@ -680,7 +683,7 @@ function loadDatabase() {
         }
     }
 
-    if (!db.questions || db.questions.length === 0) {
+    if (!db.indexPreloaded) {
         preloadDefaultQuestions();
     } else {
         updateDashboardUI();
